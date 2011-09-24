@@ -64,11 +64,9 @@ class query:
     def GET(self):
         stuff = web.input(fp_code="")
         response = fp.best_match_for_query(stuff.fp_code)
-        artist = response.metadata['artist'] if 'artist' in response.metadata else ''
-        title  = response.metadata['title']  if 'title'  in response.metadata else ''
         return json.dumps({"ok":True, "query":stuff.fp_code, "message":response.message(), "match":response.match(), "score":response.score, \
                         "qtime":response.qtime, "track_id":response.TRID, "total_time":response.total_time,
-                        "metadata":{"artist":artist, "title":title } })
+                        "metadata":{"artist":response.metadata.get("artist"), "title":response.metadata.get("track") } })
 
 
 application = web.application(urls, globals())#.wsgifunc()
