@@ -66,7 +66,7 @@ class query:
         response = fp.best_match_for_query(stuff.fp_code)
         return json.dumps({"ok":True, "query":stuff.fp_code, "message":response.message(), "match":response.match(), "score":response.score, \
                         "qtime":response.qtime, "track_id":response.TRID, "total_time":response.total_time,
-                        "metadata":{"artist":response.metadata.artist, "title":response.metadata.title } })
+                        "metadata":{"artist":response.metadata['artist'], "title":response.metadata['title'] } })
 
 
 application = web.application(urls, globals())#.wsgifunc()
