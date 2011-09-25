@@ -66,17 +66,6 @@ def inflate_code_string(s):
         sorted hex and converts it to the standard code string."""
     n = int(len(s) / 10.0) # 5 hex bytes for hash, 5 hex bytes for time (40 bits)
 
-    def pairs(l, n=2):
-        """Non-overlapping [1,2,3,4] -> [(1,2), (3,4)]"""
-        # return zip(*[[v for i,v in enumerate(l) if i % n == j] for j in range(n)])
-        end = n
-        res = []
-        while end <= len(l):
-            start = end - n
-            res.append(tuple(l[start:end]))
-            end += n
-        return res
-
     # Parse out n groups of 5 timestamps in hex; then n groups of 8 hash codes in hex.
     end_timestamps = n*5
     times = [int(''.join(t), 16) for t in chunker(s[:end_timestamps], 5)]
