@@ -67,7 +67,8 @@ def inflate_code_string(s):
     n = int(len(s) / 10.0) # 5 hex bytes for hash, 5 hex bytes for time (40 bits)
 
     # Parse out n groups of 5 timestamps in hex; then n groups of 8 hash codes in hex.
-    end_timestamps = n*5
+    #end_timestamps = n*5
+    end_timestamps = int(len(s) / 2)
     times = [int(''.join(t), 16) for t in chunker(s[:end_timestamps], 5)]
     codes = [int(''.join(t), 16) for t in chunker(s[end_timestamps:], 5)]
 
