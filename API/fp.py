@@ -72,7 +72,6 @@ def inflate_code_string(s):
     times = [int(''.join(t), 16) for t in chunker(s[:end_timestamps], 5)]
     codes = [int(''.join(t), 16) for t in chunker(s[end_timestamps:], 5)]
 
-    assert(len(times) == len(codes)) # these should match up!
     return ' '.join('%d %d' % (c, t) for c,t in zip(codes, times))
 
 def decode_code_string(compressed_code_string):
